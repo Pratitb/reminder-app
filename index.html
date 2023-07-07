@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="main.css">
+    <title>Reminder App</title>
+</head>
+
+<body>
+    <div class="wrap">
+        <div class="main-time">-:--:--</div>
+        <p class="head">set a reminder</p>
+        <div class="date-wrap">
+            <div class="date-one">
+                <p class="date">select a date</p>
+                <input type="date" name="reminder-date" id="date" value="" disabled>
+            </div>
+            <div class="date-two">
+                <p class="date-err">Date cannot be empty</p>
+            </div>
+        </div>
+        <div class="time-wrap">
+            <div class="hour">
+                <div class="hour-one">
+                    <p class="hour-text">hour</p>
+                    <select name="hour-text" id="hour"></select>
+                    <!-- <input type="number" name="hour-text" id="hour" placeholder="HH"> -->
+                </div>
+                <div class="hour-two">
+                    <p class="hour-err"></p>
+                </div>
+            </div>
+            <div class="minutes">
+                <div class="mins-one">
+                    <p class="minutes-text">minutes</p>
+                    <select name="minutes-text" id="minutes"></select>
+                    <!-- <input type="number" name="minutes-text" id="minutes" placeholder="MM"> -->
+                </div>
+                <div class="mins-two">
+                    <p class="mins-err"></p>
+                </div>
+            </div>
+            <select name="day-night" id="day-night">
+                <option value="AM">am</option>
+                <option value="PM">pm</option>
+            </select>
+        </div>
+        <div class="note-box">
+            <textarea name="reminder-note" id="reminderNote" placeholder="type a note for the reminder..." cols="30"
+                rows="3"></textarea>
+            <p class="note-err">Note cannot be empty</p>
+        </div>
+        <a class="add-reminder">Add</a>
+    </div>
+    <div class="reminder-summary">
+        <p class="reminder-success"></p>
+    </div>
+    <!-- scripts -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+    <script src="main.js"></script>
+</body>
+
+</html>

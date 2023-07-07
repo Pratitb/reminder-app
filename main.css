@@ -1,0 +1,176 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body{
+    font-family: 'Fira Sans', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 20px 0;
+    min-height: 100vh;
+}
+.wrap{
+    max-width: 500px;
+    padding: 40px;
+    border-radius: 5px;
+    display: flex;
+    /* align-items: center; */
+    justify-content: center;
+    flex-direction: column;
+    background-color: #A5D6A7;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+}
+.main-time{
+    font-size: 50px;
+    margin: 0;
+    text-align: center;
+}
+.head{
+    font-size: 20px;
+    letter-spacing: 2px;
+    /* text-decoration: underline; */
+    text-transform: uppercase;
+    text-align: center;
+    color: rgba(0, 0, 0, 0.75);
+}
+.date-wrap{
+    display: flex;
+    flex-direction: column;
+    margin: 55px 0 45px;
+}
+.date{
+    margin-right: 15px;
+    font-size: 14px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+.date-one{
+    display: flex;
+    align-items: center;
+}
+.date-one input{
+    font-size: 18px;
+    padding: 5px 10px;
+}
+.time-wrap{
+    display: flex;
+    gap: 0 20px;
+    margin: 0 0 40px;
+}
+.hour, .minutes{
+    display: flex;
+    flex-direction: column;
+}
+.hour-one, .mins-one{
+    display: flex;
+    align-items: center;
+}
+.hour-text, .minutes-text{
+    font-size: 12px;
+    margin: 0 6px 0 0;
+    text-transform: uppercase;
+}
+#hour, #minutes{
+    width: 70px;
+    height: 30px;
+    padding: 0 10px;
+    font-size: 18px;
+    outline: none;
+}
+input, textarea, select{
+    background-color: #EEEEEE;
+}
+input[type=date]{
+    border: none;
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+select{
+    border: none;
+}
+
+/* Firefox */
+input[type=number] {
+    appearance: textfield;
+  -moz-appearance: textfield;
+}
+
+#day-night{
+    font-size: 18px;
+    padding: 0 4px;
+}
+input:focus-visible, select:focus-visible, textarea:focus-visible{
+    outline: none;
+}
+#reminderNote{
+    width: 100%;
+    font-size: 20px;
+    padding: 10px;
+    color: rgba(0, 0, 0, 0.75);
+    border: none;
+}
+#reminderNote::placeholder{
+    color: rgba(0, 0, 0, 0.7);
+}
+.add-reminder{
+    width: 100%;
+    /* border: 1px solid; */
+    font-size: 20px;
+    padding: 10px 0;
+    margin: 40px 0 0;
+    border-radius: 4px;
+    transition: 0.3s;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    color: #000000;
+    background-color: #64B5F6;
+    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+}
+.add-reminder:hover{
+    transform: scale(1.1);
+    background-color: #42A5F5;
+    /* color: #FFFFFF; */
+}
+.reminder-success{
+    background-color: #66BB6A;
+    visibility: hidden;
+    width: 500px;
+    padding: 20px 15px;
+    color: #FFFFFF;
+    font-size: 20px;
+    text-align: center;
+    transition: 0.3s;
+    opacity: 0;
+    line-height: 1.5;
+    border-radius: 4px;
+}
+.reminder-success.fadeIn{
+    opacity: 1;
+    visibility: visible;
+}
+.hour-err, .mins-err, .date-err, .note-err{
+    visibility: hidden;
+    position: absolute;
+    color: #D32F2F;
+    font-size: 12px;
+}
+.summ-date, .summ-time, .summ-note{
+    text-decoration: underline;
+    font-weight: 700;
+}
+.summ-note{
+    text-transform: capitalize;
+}
+.note-box{
+    position: relative;
+}
+.note-err{
+    position: absolute;
+}
