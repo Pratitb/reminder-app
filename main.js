@@ -64,7 +64,6 @@ function checkVal(input, max, error, timeHand) {
             error.style.visibility = 'hidden'
         }, 5000);
 
-        console.log(input.value, 'greater than max')
         input.value = ''
     } else if (input.value.length > 2) {
         error.style.visibility = 'visible'
@@ -75,23 +74,31 @@ function checkVal(input, max, error, timeHand) {
         return (input.value)
     }
 }
+
+function visible(error){
+    error.style.visibility = 'visible'
+}
+function hidden(error){
+    error.style.visibility = 'hidden'
+}
 // check date and time validity
 function checkEmpty(input1, input2, error1, error2) {
     if (input1.value == '' && input2.value == '') {
-        error1.style.visibility = 'visible'
-        error2.style.visibility = 'visible'
+        visibility(error1)
+        visibility(error2)
     } else if (input1.value == '') {
-        error1.style.visibility = 'visible'
-        error2.style.visibility = 'hidden'
+        visible(error1)
+        hidden(error2)
     } else if (input2.value == '') {
-        error2.style.visibility = 'visible'
-        error1.style.visibility = 'hidden'
+        visible(error2)
+        hidden(error1)
     } else {
-        error1.style.visibility = 'hidden'
-        error2.style.visibility = 'hidden'
+        hidden(error1)
+        hidden(error2)
         let dateVal = input1.value
-        // console.log(dateVal);
         let noteVal = input2.value
+        // usually functions can return only 1 value
+        // if we want to return multiple values then we can use array. return as array and use as array
         return [dateVal, noteVal]
     }
 }
@@ -142,7 +149,7 @@ function getAllValues() {
          localStorage.setItem(bodyElements.reminderCount, JSON.stringify(reminderObj))
         } */
     } else {
-        console.log('you missed some fields')
+        // console.log('you missed some fields')
     }
     // checkMinsVal(bodyElements.minutesInput, 59, bodyElements.minutesErr)
     // console.log(new Date(bodyElements.datePicker.value).toLocaleDateString())
@@ -169,27 +176,19 @@ function setMinDate() {
 // get current time
 function getCurrentTime() {
     let currentLiveTime = new Date().toLocaleTimeString()
-    // console.log(currentLiveTime, 'current time')
 
     let currentLiveHours = currentLiveTime.split(":", 2)[0]
-    // console.log(currentLiveHours, 'hours')
     bodyElements.hourInput.value =  `0${+currentLiveHours}`
 
     let currentLiveMinutes = currentLiveTime.split(":", 2)[1]
-    // console.log((currentLiveMinutes), 'minutes');
     bodyElements.minutesInput.value = currentLiveMinutes
-    // console.log(bodyElements.minutesInput.value);
 
     let secondsTimeUnit = currentLiveTime.split(':')[2]
-    // console.log(secondsTimeUnit)
     let getSplitTimeUnit = secondsTimeUnit.substring(3, 6)
-    // console.log(getSplitTimeUnit);
 
     let timeUnitOpts = (bodyElements.dayNight).options;
-    // console.log(timeUnitOpts)
     Array.from(timeUnitOpts).forEach((option) => {
         if (option.value == getSplitTimeUnit) {
-            // console.log('this works')
             option.setAttribute('selected', 'true')
         } else {
             return false
@@ -223,12 +222,8 @@ function removeError() {
 // check if date valid
 function checkDateValidity() {
     let currentDate = +new Date().getFullYear()
-    console.log(typeof (currentDate), 'current year')
-    // console.log(bodyElements.datePicker.value, 'input date')
     let inputDate = bodyElements.datePicker.value
-    // console.log(inputDate, 'input year');
     let inputYear = inputDate.split('-')[0]
-    console.log(typeof (inputYear), 'input year');
     if (+inputYear < currentDate || inputYear.length > 4) {
         showYearError()
     } else if (inputYear.length > 4) {
@@ -237,6 +232,7 @@ function checkDateValidity() {
         removeError()
     }
 }
+// check reminder time in local and check if match
 function matchReminderTime(){
     let reminders = JSON.parse(localStorage.getItem("reminders"))
     // console.log(reminders, 'reminders array from local storage')
@@ -244,22 +240,13 @@ function matchReminderTime(){
     let currentMonth = `0${bodyElements.getDate.getMonth() + 1}`
     let currentYear = `${bodyElements.getDate.getFullYear()}`
     let matchDate = `${currentYear}-${currentMonth}-${currentDay}`
-    // console.log(matchDate);
     let currentTime = new Date().toLocaleTimeString()
     let splitCurrTime = currentTime.split("")
     let finalCurrTime = `0${splitCurrTime[0]}:${splitCurrTime[2]}${splitCurrTime[3]}${splitCurrTime[8]}${splitCurrTime[9]}`
-    // console.log(typeof(finalCurrTime), 'final string');
-    // console.log(splitCurrTime)
-    // console.log(currentTime)
 
     if(reminders){
         reminders.forEach(reminder => {
-            // console.log(reminder.time)
-            // console.log(finalCurrTime)
             if(reminder.time == finalCurrTime && reminder.date == matchDate){
-                // console.log(reminder.time)
-                // console.log(finalCurrTime);
-                // console.log('your reminder ran')
                 bodyElements.remindSuccess.innerHTML = `It's time to <b>${reminder.note}.</b>`
                 bodyElements.remindSuccess.classList.add('fadeIn')
     
@@ -278,25 +265,20 @@ setInterval(() => {
 // check past time
 function checkPastTime(){
     let currentTimeHourIndex = bodyElements.hourInput.selectedIndex
-    console.log(currentTimeHourIndex);
     let allOpts = (bodyElements.hourInput).options
     console.log(allOpts);
     Array.from(allOpts).forEach((option) => {
-        console.log(option);
-        // console.log(option.index);
         if(option.index < currentTimeHourIndex){
             
-            // option.remove()
             option.style.display = 'none'
         }
         else{
             option.style.display = 'block'
         }  
-        // console.log(optIndex);
     })
     let currentTimeUnit = bodyElements.dayNight.options[bodyElements.dayNight.selectedIndex].value
     let inputDate = bodyElements.datePicker.value
-    console.log(inputDate);
+    // console.log(inputDate);
     let currentDay = `0${bodyElements.getDate.getDate()}`
     let currentMonth = `0${bodyElements.getDate.getMonth() + 1}`
     let currentYear = `${bodyElements.getDate.getFullYear()}`
